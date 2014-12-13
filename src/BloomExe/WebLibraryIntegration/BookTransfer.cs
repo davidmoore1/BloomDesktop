@@ -476,14 +476,14 @@ namespace Bloom.WebLibraryIntegration
 			return _parseClient.GetSingleBookRecord(metadata.Id) != null;
 		}
 
-		// Wait (up to three seconds) for data uploaded to become available.
+		// Wait (up to 30 seconds) for data uploaded to become available.
 		// Currently only used in unit testing.
 		// I have no idea whether 3s is an adequate time to wait for 'eventual consistency'. So far it seems to work.
 		internal void WaitUntilS3DataIsOnServer(string bookPath)
 		{
 			var s3Id = S3BookId(BookMetaData.FromFolder(bookPath));
 			var count = Directory.GetFiles(bookPath).Length;
-			for (int i = 0; i < 30; i++)
+			for (int i = 0; i < 300; i++)
 			{
 				var uploaded = _s3Client.GetBookFileCount(s3Id);
 				if (uploaded >= count)
