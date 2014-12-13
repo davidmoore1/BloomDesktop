@@ -340,16 +340,35 @@ DIV.marginBox
 	border: none;
 }
 
+//#formatButton
+//{
+//	overflow: hidden;
+//	position: absolute;
+//	margin-left: 3px;
+//	bottom: 0;
+//	left:0;
+//	/*The font-size here is weird, but if we don't set it, the growing/shrinking font of the text will actually move the button up/down on the page*/
+//	font-size: 10pt;
+//}
+
 #formatButton
 {
+	width: 18px;
+	height: 21px !important;
 	overflow: hidden;
+	/*+placement:displace 3px -18px;*/
 	position: absolute;
 	margin-left: 3px;
 	bottom: 0;
-	left:0;
 	/*The font-size here is weird, but if we don't set it, the growing/shrinking font of the text will actually move the button up/down on the page*/
 	font-size: 10pt;
 }
+#formatButton IMG
+{
+	width: 14px;
+	height: 14px;
+}
+
 #formatButton:Hover
 {
 	color: #000000;

@@ -509,18 +509,24 @@ var StyleEditor = (function () {
         }
         this._previousBox = targetBox;
 
+        /*         TODO this approach solved a major problem, but it messes with the Decodable Reader:
+        
         // put the format button in the editable text box itself, so that it's always in the right place.
         // unfortunately it will be subject to deletion because this is an editable box. But we can mark it as uneditable, so that
         // the user won't see resize and drag controls when they click on it
         $(targetBox).append('<div id="formatButton" contenteditable="false" class="bloom-ui"><img  contenteditable="false" src="' + editor._supportFilesRoot + '/img/cogGrey.svg"></div>');
-
+        
+        
         //make the button stay at the bottom if we overflow and thus scroll
         $(targetBox).on("scroll", function () {
-            var newBottom = -1 * $(this).scrollTop();
-            $("#formatButton").css({
-                bottom: newBottom
-            });
+        var newBottom = -1 * $(this).scrollTop();
+        $("#formatButton").css({
+        bottom: newBottom
         });
+        });
+        */
+        //TODO so we're going back to puting the gear outside the edit box for now, until we can get the Reader tools to ignore it:
+        $(targetBox).after('<div id="formatButton" class="bloom-ui"><img src="' + editor._supportFilesRoot + '/img/cogGrey.svg"></div>');
 
         var formatButton = $('#formatButton');
 
@@ -1109,6 +1115,9 @@ var StyleEditor = (function () {
     // Remove any additions we made to the element for the purpose of UI alone
     StyleEditor.CleanupElement = function (element) {
         $(element).find(".bloom-ui").each(function () {
+            $(this).remove();
+        });
+        $(element).parent().find(".bloom-ui").each(function () {
             $(this).remove();
         });
 

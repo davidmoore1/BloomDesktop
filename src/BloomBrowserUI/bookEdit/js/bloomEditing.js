@@ -1152,8 +1152,15 @@ function SetupElements(container) {
             // so the solution is just to insert a span that you can't see, here during the focus event.
             // Then, we remove that span in the blur event.
             if ($(this).text() == '') {
+                /* we're backing off this for now because the Decodable reader doesn't yet know about this character, and it would cause it to always find the first word to be undecodable.
                 //add a span with only a zero-width space in it
-                $(this).html('<span class="bloom-ui">&#8203;</span>');
+                //$(this).html('<span class="bloom-ui">&#8203;</span>');
+
+                Instead, we'll go with a &nbsp, which it does know about
+                */
+                $(this).html('&nbsp;');
+                //but let's select it so we can get rid of it.
+                document.execCommand('selectAll', false, null);
             }
             return;
         }
